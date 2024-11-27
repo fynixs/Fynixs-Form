@@ -1,0 +1,523 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Logo and Title Container */
+
+  
+  /* Body Styling */
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(#030C15, #0d3f47);
+    color: #E9EFEF;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Form Container */
+  .form-container {
+    background: #030C15;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Form Title */
+  h1 {
+    font-family: 'Panchang', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: #00D9FF;
+  }
+  
+  /* Label Styling */
+  label {
+    font-size: 0.9rem;
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: 600;
+  }
+  
+select{
+    appearance: none;
+}
+.header{
+    color: white;
+    font-size: 40px;
+    
+}
+
+  /* Input Fields */
+  input, select, textarea, button,datalist {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    border: 1px solid #00D9FF; /* Adjust border color */
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    background-color: #030C15; /* Dark background */
+    color: #E9EFEF; /* Light text color */
+  }
+  
+  /* Input Placeholder Color */
+  input::placeholder {
+    color: #E9EFEF;
+    opacity: 0.8;
+  }
+  
+  .industry,.company-size,datalist,.country:focus{
+    outline: none;
+    border-color: #00D9FF; /* Focused input border color */
+    box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Light blue shadow when focused */
+  }
+  /* Button */
+  button {
+    background: #00D9FF;
+    color: #030C15;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #00BCE8;
+  }
+
+  input,datalist[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    border: 1px solid #00D9FF; /* Adjust border color */
+    font-size: 1rem;
+    font-family: 'Manrope', sans-serif;
+    background-color: #030C15; /* Dark background */
+    color: #E9EFEF; /* Light text color */
+  }
+
+  input:hover{
+    border: 1px solid #00D9FF;
+  }
+  input:-internal-autofill-selected{
+    background-color: 00D9FF;
+  }
+  
+  input,datalist[type="text"]:focus {
+    outline: none;
+    border-color: #00D9FF; /* Focused input border color */
+    box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Light blue shadow when focused */
+  }
+  .phone-number{
+    display: flex;
+    padding: 0 10px;
+    justify-content: flex-start;
+    border-radius: 5px;
+    gap: 10px;
+    border: 1px solid #00D9FF; /* Adjust border color */
+
+  }
+  .selection-phone-number{
+    outline: none;
+    width: 50px;
+    padding: 0;
+    border: none;
+    appearance: none;
+  }
+  
+
+  .phone-number input{
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  #next-to-step-3{
+    margin-top: 20px;
+  }
+
+ 
+ 
+  .step {
+    display: none;
+  }
+  .step.active {
+    display: block;
+  }
+  input, select, textarea, button,datalist {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #00D9FF;
+    background-color: #030C15;
+    color: #E9EFEF;
+  }
+  button {
+    background-color: #00D9FF;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #030C15;
+    padding: 12px 0;
+  }
+  button:hover {
+    background-color: #E9EFEF;
+    color: #030C15;
+  }
+  .checkbox-group label {
+    /* display: block; */
+    margin: 5px 0;
+    
+  }
+
+  .checkbox-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    background: #084e5a;
+    padding: 1rem;
+    border-radius: 18px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  /* General Styles for Checkboxes */
+ input[type="checkbox"] {
+    display: none;
+ }
+  
+  
+  
+  /* Custom Checkbox Style */
+  input[type="checkbox"] + label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    color: #E9EFEF;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px; /* Space for the custom checkbox */
+  }
+  
+  /* Custom Checkbox Appearance */
+  input[type="checkbox"] + label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: #030C15;
+    border: 2px solid #00D9FF;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Checked State */
+  input[type="checkbox"]:checked + label::before {
+    background-color: #00D9FF;
+    border-color: #00D9FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Add a Checkmark Icon */
+  input[type="checkbox"]:checked + label::after {
+    content: "✓";
+    color: #030C15;
+    font-size: 14px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Optional Hover Effect */
+  input[type="checkbox"] + label:hover::before {
+    border-color: #E9EFEF;
+  }
+  
+/* Entire section container */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full-screen height */
+    background: linear-gradient(to bottom, #030C15, #001018); /* Matches the theme */
+    padding-top: 30px;
+  }
+  
+  /* Header styling */
+  .form-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-header h1 {
+    color: #00D9FF; /* Primary theme color */
+    font-family: 'Manrope', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  /* Form container remains the same */
+  .form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #030C15;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #E9EFEF;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    border-color: #00D9FF;
+  }
+  
+  .form-input:focus {
+    border-color: #00D9FF;
+    outline: none;
+  }
+  
+  .error-message {
+    font-size: 0.9rem;
+    color: #FF5733;
+    margin-top: 5px;
+  }
+  
+
+  .thank-you-card {
+    background-color: #1F2A35; /* Dark card background */
+    border-radius: 8px; /* Rounded corners for the card */
+    padding: 30px;
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
+  }
+  
+  .thank-you-card h1 {
+    color: #00D9FF; /* Bright color for the header */
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .thank-you-card p {
+    color: #E9EFEF;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Intro card styles */
+.intro-card {
+  background-color: #1F2A35; /* Dark card background */
+  border-radius: 8px; /* Rounded corners for the card */
+  padding: 40px;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
+}
+
+.intro-card h1 {
+  color: #00D9FF; /* Bright color for the heading */
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.intro-card p {
+  color: #E9EFEF;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.start {
+  display: inline-block;
+  background-color: #00D9FF; /* Primary color */
+  color: #030C15; /* Dark text for contrast */
+  padding: 15px 30px;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 30px;
+  transition: background-color 0.3s;
+}
+
+.start:hover {
+  background-color: #00a1cc; /* Darker shade for hover effect */
+}
+
+@media only screen and (max-width: 768px) {
+  select {
+    font-size: 16px; /* Larger text for accessibility */
+    padding: 12px; /* Comfortable padding */
+  }
+}
+
+
+/* For Select2 */
+.select2-container .select2-selection {
+  background-color: #030C15; /* Dark theme */
+  color: #E9EFEF; /* Text color */
+  border: 1px solid #00D9FF; /* Primary color */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  color: #00D9FF;
+}
+
+
+/* Progress Container */
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Bar steps */
+.bar {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background: #e9ecef; /* Gray background for inactive steps */
+  color: #000;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+/* Active step */
+.bar.active {
+  background: #00d9ff; /* Blue for the current step */
+  color: #fff;
+}
+
+/* Completed step */
+.bar.completed {
+  background: #00d9ff; /* Blue for completed steps */
+  color: #fff;
+}
+
+/* Connecting line */
+.progress-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  right: 15px;
+  height: 5px;
+  background: #e9ecef; /* Gray for inactive line */
+  z-index: 0;
+}
+
+/* Active progress line fill */
+.progress-container .progress-bar {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  height: 5px;
+  background: #00d9ff; /* Blue for active progress line */
+  z-index: 1;
+  transition: width 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #00D9FF;
+  border-radius: 4px;
+  background: #030C15;
+  color: #E9EFEF;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+
+.input-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #E9EFEF;
+  background: #030C15;
+  border: 1px solid #00D9FF;
+  border-radius: 4px;
+}
+
+/* Custom Radio Buttons */
+.custom-radio-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.custom-radio-group input[type="radio"] {
+  display: none; /* Hide the default radio input */
+}
+
+.custom-radio-group label {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #00D9FF;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: #E9EFEF;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-radio-group input[type="radio"]:checked + label {
+  background-color: #00D9FF;
+  color: #030C15;
+  border-color: #00D9FF;
+}
+
+.custom-radio-group label:hover {
+  background-color: rgba(0, 217, 255, 0.2);
+}
+

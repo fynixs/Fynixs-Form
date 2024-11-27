@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYNIXS Form</title>
+  <link rel="stylesheet" href="../Outbound Form/syle.css">
+  <link rel="icon" href="../Images/FynixsLogo.png" type="image/png" sizes="200px">
+  <!-- Include Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Panchang:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <div class="form-container">
+        <div class="progress-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar"></div>
+            <!-- Steps -->
+            <div class="bar active" data-step="1">1</div>
+            <div class="bar" data-step="2">2</div>
+            <div class="bar" data-step="3">3</div>
+            <div class="bar" data-step="4">4</div>
+            <div class="bar" data-step="5">5</div>
+        </div>
+
+        <form id="inboundForm">
+            <!-- Step 1: Contact & Business Information -->
+            <div class="form-step" id="step-1">
+              <h2>Contact & Business Information</h2>
+              
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+              <small id="fullName-error" class="error-message"></small>
+              
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="Enter your email address">
+              <span id="emailError" class="error-message"></span>
+              
+              <label for="companyName">Company Name</label>
+              <input type="text" id="companyName" name="companyName" required placeholder="Enter your company name">
+              <small id="compamyName-error" class="error-message"></small>
+              
+              <label for="website">Website URL</label>
+              <input type="url" id="website" name="website" placeholder="Enter your website URL">
+              <small id="websiteError" class="error-message"></small>
+              
+              <label for="role">Role/Title</label>
+              <input type="text" id="role" name="role" required placeholder="Enter your role/title">
+              
+              <label for="industry">Industry</label>
+              <select id="industry" class="industry dropdown" data-other-input="industry-other-input">
+                  <option value="" disabled selected>Select your industry</option>
+                  <option value="Tech">Tech</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Other">Other</option>
+              </select>
+              
+              <input
+                  type="text"
+                  id="industry-other-input"
+                  class="hidden other-input"
+                  placeholder="Please specify your industry"
+              />
+              
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+
+            <!-- Step 2: Current Challenges & Processes -->
+            <div class="form-step" id="step-2" style="display: none;">
+              <h2>Current Challenges & Processes</h2>
+              <label for="challenges">What challenges are you currently facing?</label>
+              <div class="checkbox-group" >
+                <input type="checkbox" name="challenges" value="Lead Generation" id="LeadGen"><label for="LeadGen">Lead Generation</label> 
+                <input type="checkbox" name="challenges" value="Scaling Sales" id="ScalingS"> <label for="ScalingS">Scaling Sales</label>
+                <input type="checkbox" name="challenges" value="Reducing Costs" id="ReducingC"> <label for="ReducingC">Reducing Costs</label>
+                <input type="checkbox" name="challenges" value="Improving Efficiency" id="IE"><label for="IE">Improving Efficiency</label>
+                <input type="checkbox" name="challenges" value="Eliminating Repetitive Tasks" id="ERT"> <label for="ERT"> Eliminating Repetitive Tasks</label>
+                <input type="checkbox" id="challenge-other1" name="challenges" value="Other"/> <label for="challenge-other1">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input1"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+              </div>
+
+              <label for="timeConsumingTasks">Which areas of your business are the most time-consuming or repetitive?</label>
+              <div class="checkbox-group">
+                <input type="checkbox" name="timeConsumingTasks" value="Data Entry" id="dataEntry"> <label for="dataEntry">Data Entry</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Lead Nurturing" id="LeadNut"> <label for="LeadNut">Lead Nurturing</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Inventory Management" id="invtM"> <label for="invtM">Inventory Management</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Customer Support" id="CS"> <label for="CS">Customer Support</label> 
+                <input type="checkbox" id="challenge-other2" name="challenges" value="Other"/> <label for="challenge-other2">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input2"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+              </div>
+
+              <label for="currentTools">What tools or software do you currently use for business operations?</label>
+                <div class="checkbox-group">
+                  <input type="checkbox" name="currentTools" value="Excel/Google Sheets" id="excelGS"> <label for="excelGS">Excel/Google Sheets</label> 
+                  <input type="checkbox" name="currentTools" value="CRM Tools" id="CRMt"> <label for="">CRM Tools</label> 
+                  <input type="checkbox" name="currentTools" value="None" id="none"> <label for="none">None</label> 
+                  <input type="checkbox" id="challenge-other3" name="challenges" value="Other"/> <label for="challenge-other3">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input3"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+                </div>
+              
+              <button type="button" class="prev-btn" >Previous</button>
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+
+            <div class="form-step" id="step-3">
+              <h2>Goals for AI, Automation, & Marketing</h2>
+            
+              <div class="form-group">
+                <label for="business-goals">What are your business goals in the next 6–12 months?</label>
+                <textarea
+                  id="business-goals"
+                  class="input-textarea"
+                  placeholder="Enter your business goals"
+                ></textarea>
+              </div>
+            
+              <div class="form-group">
+                <label for="specific-outcomes">What specific outcomes are you hoping to achieve with AI or automation?</label>
+                <textarea
+                  id="specific-outcomes"
+                  class="input-textarea"
+                  placeholder='e.g., "Cutting costs by 20%," "Streamlining workflows"'
+                ></textarea>
+              </div>
+            
+              <div class="form-group">
+                <label for="success-vision">What does success look like for your business after incorporating these solutions?</label>
+                <textarea
+                  id="success-vision"
+                  class="input-textarea"
+                  placeholder="Describe your vision of success"
+                ></textarea>
+              </div>
+              <button type="button" class="prev-btn" >Previous</button>
+              <button type="button" class="next-btn">Next</button>
+              
+            </div>
+
+            <div class="form-step" id="step-4">
+              <h2>Qualification Questions</h2>
+            
+              <!-- Question 1 -->
+              <div class="form-group">
+                <label>Have you implemented any form of AI or automation before?</label>
+                <div class="input-radio-group">
+                  <label><input type="radio" name="ai-implemented" value="yes" id="ai-yes"> Yes</label>
+                  <label><input type="radio" name="ai-implemented" value="no" id="ai-no"> No</label>
+                </div>
+                <textarea
+                  id="ai-description"
+                  class="input-textarea hidden"
+                  placeholder="If yes, please describe your previous implementation"
+                ></textarea>
+              </div>
+            
+              <!-- Question 2 -->
+              <div class="form-group">
+                <label>Do you have processes ready for automation?</label>
+                <div class="input-radio-group">
+                  <label><input type="radio" name="automation-processes" value="yes"> Yes</label>
+                  <label><input type="radio" name="automation-processes" value="no"> No</label>
+                  <label><input type="radio" name="automation-processes" value="not-sure"> Not sure</label>
+                </div>
+              </div>
+                        
+              <!-- Question 3 -->
+              <div class="form-group">
+                <label for="timeline">How soon are you looking to start?</label>
+                <select id="timeline" class="input-select industry">
+                  <option value="">Select a timeline</option>
+                  <option value="immediately">Immediately</option>
+                  <option value="1-3-months">1–3 months</option>
+                  <option value="3-6-months">3–6 months</option>
+                  <option value="6+months">6+ months</option>
+                </select>
+              </div>
+            
+              <!-- Question 4 -->
+              <div class="form-group">
+                <label>Are you the decision-maker for this project?</label>
+                <div class="input-radio-group">
+                  <label><input type="radio" name="decision-maker" value="yes"> Yes</label>
+                  <label><input type="radio" name="decision-maker" value="no"> No</label>
+                </div>
+              </div>
+
+              <button type="button" class="prev-btn" >Previous</button>
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+
+            <div id="step-5" class="form-step">
+              <h2>Discovery Call Details</h2>
+              
+              <!-- Preferred Time for the Discovery Call -->
+              <div class="form-group">
+                <label for="preferred-time">Preferred Time for the Discovery Call</label>
+                <input type="text" id="preferred-time" name="preferred-time" class="input-field" placeholder="Select date and time">
+              </div>
+              
+            
+              <!-- Timezone Dropdown -->
+              <div class="form-group">
+                <label for="timezone">Timezone</label>
+                <select id="timezone" name="timezone" class="input-field">
+                  <option value="" disabled selected>Select your timezone</option>
+                  <option value="pst">PST (Pacific Standard Time)</option>
+                  <option value="mst">MST (Mountain Standard Time)</option>
+                  <option value="cst">CST (Central Standard Time)</option>
+                  <option value="est">EST (Eastern Standard Time)</option>
+                  <option value="gmt">GMT (Greenwich Mean Time)</option>
+                  <option value="cet">CET (Central European Time)</option>
+                  <option value="ist">IST (Indian Standard Time)</option>
+                  <!-- Add more time zones as needed -->
+                </select>
+              </div>
+            
+              <!-- Tasks or Operations to Automate -->
+              <div class="form-group">
+                <label for="tasks-to-automate">What specific tasks or operations would you like to automate first?</label>
+                <textarea id="tasks-to-automate" name="tasks-to-automate" rows="4" class="input-field industry" placeholder="Describe the tasks or processes..."></textarea>
+              </div>
+            
+              <!-- Anything Else (Optional) -->
+              <div class="form-group">
+                <label for="additional-info">Anything else you'd like us to know? (Optional)</label>
+                <textarea id="additional-info" name="additional-info" rows="4" class="input-field" placeholder="Share any additional details..."></textarea>
+              </div>
+
+              <button type="button" class="prev-btn" >Previous</button>
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+            
+            
+            
+
+          </form>
+          
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      // Initialize Flatpickr
+      flatpickr("#preferred-time", {
+        enableTime: true, // Enable time picker
+        dateFormat: "Y-m-d H:i", // Customize format: YYYY-MM-DD HH:mm
+        time_24hr: true, // Use 24-hour format
+        defaultHour: 9, // Default time set to 9:00
+        defaultMinute: 0, // Default minutes set to 0
+        theme: "dark", // Set theme (we'll customize this in CSS)
+      });
+    </script>
+    
+</body>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYNIXS Form</title>
+  <link rel="stylesheet" href="syle.css">
+  <link rel="icon" href="../Images/FynixsLogo.png" type="image/png" sizes="200px">
+  <!-- Include Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Panchang:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  
+  <div class="form-container">
+     <div id="progress-container">
+    <div class="progress-container">
+      <!-- Progress Bar -->
+      <div class="progress-bar"></div>
+
+      <!-- Steps -->
+      <div class="bar active" data-step="1">1</div>
+      <div class="bar" data-step="2">2</div>
+      <div class="bar" data-step="3">3</div>
+    </div>
+    <form id="multi-step-form" >
+      <!-- Step 1 -->
+      <div class="step active" id="step-1">
+        <h1>Step 1: Basic Info</h1>
+        <label for="company-name">Your Company Name *</label>
+        <input type="text" id="companyName" name="company-name" placeholder="Enter your company name"  required>
+        <small id="company-name-error" class="error-message"></small>
+
+        <label for="industry">Industry *</label>
+      <select id="industry" name="industry" required class="industry">
+        <option value="" disabled selected>Select your industry</option>
+        <option value="Local Based Service">Local Based Service</option>
+        <option value="Software Development">Software Development</option>
+        <option value="E-commerce">E-commerce</option>
+        <option value="Retail">Retail</option>
+        <option value="education">Education</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- Hidden input field for 'Other' industry -->
+      <div id="other-industry-container" style="display: none;">
+        <label for="other-industry">Please specify your industry</label>
+        <input type="text" id="industry" name="industry" placeholder="Enter your industry">
+      </div>
+
+
+  
+        <div class="form-group">
+            <label for="website">Company Website</label>
+            <input 
+              type="url" 
+              id="website" 
+              name="website" 
+              placeholder="https://example.com" 
+              required 
+              class="form-input"
+            />
+            <small id="websiteError" class="error-message"></small>
+          </div>
+          
+                
+        <!-- Company Size Dropdown -->
+        <label for="company-size">Company Size *</label>
+        <select id="companySize" name="company-size" class="company-size" required>
+            <option value="" disabled selected>Select your company size</option>
+            <option value="1-10">1-10</option>
+            <option value="11-50">11-50</option>
+            <option value="51-200">51-200</option>
+            <option value="201+">201+</option>
+        </select>
+
+        <label for="country">Country/Location *</label>
+        <select id="country" name="country" class="country" required>
+          <option value="" disabled selected>Select your country</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="Andorra">Andorra</option>
+          <option value="Angola">Angola</option>
+          <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Azerbaijan">Azerbaijan</option>
+          <option value="Bahamas">Bahamas</option>
+          <option value="Bahrain">Bahrain</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Barbados">Barbados</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Belize">Belize</option>
+          <option value="Benin">Benin</option>
+          <option value="Bhutan">Bhutan</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+          <option value="Botswana">Botswana</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Brunei">Brunei</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Burkina Faso">Burkina Faso</option>
+          <option value="Burundi">Burundi</option>
+          <option value="Cabo Verde">Cabo Verde</option>
+          <option value="Cambodia">Cambodia</option>
+          <option value="Cameroon">Cameroon</option>
+          <option value="Canada">Canada</option>
+          <option value="Central African Republic">Central African Republic</option>
+          <option value="Chad">Chad</option>
+          <option value="Chile">Chile</option>
+          <option value="China">China</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Comoros">Comoros</option>
+          <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+          <option value="Costa Rica">Costa Rica</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Cuba">Cuba</option>
+          <option value="Cyprus">Cyprus</option>
+          <option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
+          <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Djibouti">Djibouti</option>
+          <option value="Dominica">Dominica</option>
+          <option value="Dominican Republic">Dominican Republic</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Egypt">Egypt</option>
+          <option value="El Salvador">El Salvador</option>
+          <option value="Equatorial Guinea">Equatorial Guinea</option>
+          <option value="Eritrea">Eritrea</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Fiji">Fiji</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="Gabon">Gabon</option>
+          <option value="Gambia">Gambia</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Germany">Germany</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Greece">Greece</option>
+          <option value="Grenada">Grenada</option>
+          <option value="Guatemala">Guatemala</option>
+          <option value="Guinea">Guinea</option>
+          <option value="Guinea-Bissau">Guinea-Bissau</option>
+          <option value="Guyana">Guyana</option>
+          <option value="Haiti">Haiti</option>
+          <option value="Holy See">Holy See</option>
+          <option value="Honduras">Honduras</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Iceland">Iceland</option>
+          <option value="India">India</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Israel">Israel</option>
+          <option value="Italy">Italy</option>
+          <option value="Jamaica">Jamaica</option>
+          <option value="Japan">Japan</option>
+          <option value="Jordan">Jordan</option>
+          <option value="Kazakhstan">Kazakhstan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Kiribati">Kiribati</option>
+          <option value="Kuwait">Kuwait</option>
+          <option value="Kyrgyzstan">Kyrgyzstan</option>
+          <option value="Laos">Laos</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lebanon">Lebanon</option>
+          <option value="Lesotho">Lesotho</option>
+          <option value="Liberia">Liberia</option>
+          <option value="Libya">Libya</option>
+          <option value="Liechtenstein">Liechtenstein</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Madagascar">Madagascar</option>
+          <option value="Malawi">Malawi</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Maldives">Maldives</option>
+          <option value="Mali">Mali</option>
+          <option value="Malta">Malta</option>
+          <option value="Marshall Islands">Marshall Islands</option>
+          <option value="Mauritania">Mauritania</option>
+          <option value="Mauritius">Mauritius</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Micronesia">Micronesia</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Monaco">Monaco</option>
+          <option value="Mongolia">Mongolia</option>
+          <option value="Montenegro">Montenegro</option>
+          <option value="Morocco">Morocco</option>
+          <option value="Mozambique">Mozambique</option>
+          <option value="Myanmar (formerly Burma)">Myanmar (formerly Burma)</option>
+          <option value="Namibia">Namibia</option>
+          <option value="Nauru">Nauru</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Nicaragua">Nicaragua</option>
+          <option value="Niger">Niger</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="North Korea">North Korea</option>
+          <option value="North Macedonia">North Macedonia</option>
+          <option value="Norway">Norway</option>
+          <option value="Oman">Oman</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Palau">Palau</option>
+          <option value="Palestine State">Palestine State</option>
+          <option value="Panama">Panama</option>
+          <option value="Papua New Guinea">Papua New Guinea</option>
+          <option value="Paraguay">Paraguay</option>
+          <option value="Peru">Peru</option>
+          <option value="Philippines">Philippines</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Rwanda">Rwanda</option>
+          <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+          <option value="Saint Lucia">Saint Lucia</option>
+          <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+          <option value="Samoa">Samoa</option>
+          <option value="San Marino">San Marino</option>
+          <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="Senegal">Senegal</option>
+          <option value="Serbia">Serbia</option>
+          <option value="Seychelles">Seychelles</option>
+          <option value="Sierra Leone">Sierra Leone</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Solomon Islands">Solomon Islands</option>
+          <option value="Somalia">Somalia</option>
+          <option value="South Africa">South Africa</option>
+          <option value="South Korea">South Korea</option>
+          <option value="South Sudan">South Sudan</option>
+          <option value="Spain">Spain</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sudan">Sudan</option>
+          <option value="Suriname">Suriname</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Syria">Syria</option>
+          <option value="Tajikistan">Tajikistan</option>
+          <option value="Tanzania">Tanzania</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Timor-Leste">Timor-Leste</option>
+          <option value="Togo">Togo</option>
+          <option value="Tonga">Tonga</option>
+          <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+          <option value="Tunisia">Tunisia</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Turkmenistan">Turkmenistan</option>
+          <option value="Tuvalu">Tuvalu</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="United Arab Emirates">United Arab Emirates</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Vanuatu">Vanuatu</option>
+          <option value="Venezuela">Venezuela</option>
+          <option value="Vietnam">Vietnam</option>
+          <option value="Yemen">Yemen</option>
+          <option value="Zambia">Zambia</option>
+          <option value="Zimbabwe">Zimbabwe</option>
+
+        </select>
+        
+
+    <button type="button" id="next-to-step-2">Next</button>
+      </div>
+
+      <!-- Step 2: Contact Person Details -->
+      <div id="step-2" class="step">
+          <h1>Contact Person Details</h1>
+      
+          <!-- Full Name -->
+          <label for="full-name">Your Full Name *</label>
+          <input type="text" id="fullName" name="full-name" placeholder="Enter full name" required>
+          <small id="fullName-error" class="error-message"></small>
+      
+          <!-- Job Title -->
+          <!-- Department -->
+        <label for="department">Department *</label>
+        <select id="department" name="department" class="industry" required>
+          <option value="" disabled selected>Select department</option>
+          <option value="Executive">Executive</option>
+          <option value="Operations">Operations</option>
+          <option value="Finance">Finance</option>
+          <option value="Technology">Technology</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Sales">Sales</option>
+          <option value="Human Resources">Human Resources</option>
+          <option value="Customer Support">Customer Support</option>
+          <option value="Product Management">Product Management</option>
+          <option value="Design">Design</option>
+          <option value="Legal">Legal</option>
+          <option value="Procurement">Procurement</option>
+          <option value="Research and Development">Research and Development</option>
+          <option value="Training">Training</option>
+          <option value="Consulting">Consulting</option>
+        </select>
+
+      
+          <!-- Email Address -->
+          
+          <label for="contact-email">Email Address *</label>
+          <input type="email" id="contactEmail" name="contact-email" placeholder="Enter email address" class="industry" required>
+          <span id="emailError" class="error-message"></span>
+      
+          <!-- Phone Number -->
+          
+          <label for="phone-number">Phone Number *</label>
+          <div class="phone-number">
+              <select name="" id="phoneNumberSelection" class="selection-phone-number" required>
+                  <option value="" disabled selected>Country Code</option>
+                  <option value="+1">+1</option>
+                  <option value="+44">+44</option>
+                  <option value="+91">+91</option>
+                  <option value="+61">+61</option>
+                  <option value="+81">+81</option>
+                  <option value="+86">+86</option>
+                  <option value="+49">+49</option>
+                  <option value="+33">+33</option>
+                  <option value="+39">+39</option>
+                  <option value="+34">+34</option>
+                  <option value="+55">+55</option>
+                  <option value="+7">+7</option>
+                  <option value="+27">+27</option>
+                  <option value="+82">+82</option>
+                  <option value="+34">+52</option>
+                  <option value="+62">+62</option>
+                  <option value="+234">+234</option>
+                  <option value="+971">(+971</option>
+                  <option value="+351">+351</option>
+                  <option value="+358">+358</option>
+                  <option value="+90">+90</option>
+                  <option value="+94">+94</option>
+                  <option value="+880">+880</option>
+                  <option value="+92">+92)</option>
+                  <option value="+63">+63</option>
+                  <option value="+64">+64</option>
+                  <option value="+1-787">+1-787</option>
+                  <option value="+48">+48</option>
+                  <option value="+420">+420</option>
+                  <option value="+373">+373</option>
+                  <option value="+260">+260</option>
+                  <option value="+250">+250</option>
+                  <option value="+372">+372</option>
+                  <option value="+233">+233</option>
+                  <option value="+84">+84</option>
+                  <option value="+66">+66</option>
+                  <option value="+60">+60</option>
+                  <option value="+94">="+94</option>
+                  <option value="+212">+212</option>
+                  <option value="+216">+216</option>
+                  <option value="+254">+254</option>
+                  <option value="+234">+234</option>
+                  <option value="+94">+94</option>
+              </select>
+              <input type="tel" id="phoneNumber" name="phone-number" placeholder="Enter phone number" required>
+          </div>
+          <span id="numberEror" class="error-message"></span>
+        
+      
+          <!-- Next Button -->
+          <button type="button" id="prev-to-step-1">Back</button>
+          <button type="button" id="next-to-step-3">Next</button>
+      </div>
+
+      
+      <div id="step-3" class="step">
+          <h1>Services & Challenges</h1>
+          <label >Services Interested In *</label>
+          <div class="checkbox-group" >
+           
+              <input type="checkbox" name="services" id="ma" ><label for="ma"> Marketing Automation</label>
+              <input type="checkbox" name="services" id="crmSetup" > <label for="mam"> CRM Setup</label> 
+              <input type="checkbox" name="services" id="LeadGen"><label for="mama"> Lead Generation</label>
+
+
+          </div>
+          <label for="current-challenges">What Would you like to automate *</label>
+          <textarea id="currentChallenges" name="current-challenges" placeholder="Describe your desired automation" class="industry" required></textarea>
+          <span id="challengesError"></span>
+
+          <label for="referral">How Did You Hear About Us? *</label>
+          <select id="referral" name="referral" required>
+            <option value="">Select an option</option>
+            <option value="referral">Referral</option>
+            <option value="social-media">Social Media</option>
+            <option value="ad">Ad</option>
+            <option value="website">Website</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="additional-comments">Additional Comments or Questions</label>
+          <textarea id="additionalComments" name="additional-comments" placeholder="Any additional information..."></textarea>
+
+          <div class="checkbox-group">
+            <input type="checkbox" name="services" id="t&c"><label for="t&c"> I agree to be contacted by FYNIXS for follow-up purposes.</label>
+          </div>
+
+          <button type="button" id="prev-to-step-2">Previous</button>
+          <button type="submit" id="submit" class="submit-button" >Submit</button>
+        </div>
+    </form>
+  </div>
+  <!-- Include Choices.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <!-- Include jQuery (required by Select2) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+  
+  </script>
+ 
+</body>
+</html>
