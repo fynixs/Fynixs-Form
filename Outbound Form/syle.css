@@ -1,51 +1,43 @@
 /* General Reset */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Manrope', sans-serif;
+  background: linear-gradient(#030C15, #0d3f47);
+  color: #E9EFEF;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
   
-  /* Logo and Title Container */
+  
 
   
-  /* Body Styling */
-  body {
-    font-family: 'Manrope', sans-serif;
-    background: linear-gradient(#030C15, #0d3f47);
-    color: #E9EFEF;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Form Container */
-  .form-container {
-    background: #030C15;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  /* Form Title */
-  h1 {
+/* Form Title */
+h1 {
     font-family: 'Panchang', sans-serif;
     font-size: 2rem;
     margin-bottom: 1rem;
     font-weight: 800;
-    color: #00D9FF;
-  }
+    color: #00D9FF; 
+}
   
-  /* Label Styling */
-  label {
-    font-size: 0.9rem;
-    display: block;
-    margin: 1rem 0 0.5rem;
-    font-weight: 600;
-  }
+ /* Label Styling */
+ label {
+  font-size: 0.9rem;
+  display: block;
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+}
+
   
 select{
     appearance: none;
@@ -56,32 +48,40 @@ select{
     
 }
 
-  /* Input Fields */
-  input, select, textarea, button,datalist {
+/* Input Fields */
+input, select, textarea, button,datalist {
     width: 100%;
     padding: 0.8rem;
     margin: 1rem 0;
     border-radius: 5px;
-    border: 1px solid #00D9FF; /* Adjust border color */
+    border: 1px solid #00D9FF;
     font-size: 1rem;
     font-family: 'Manrope', sans-serif;
-    background-color: #030C15; /* Dark background */
-    color: #E9EFEF; /* Light text color */
-  }
-  
-  /* Input Placeholder Color */
-  input::placeholder {
+    background-color: #030C15;
     color: #E9EFEF;
-    opacity: 0.8;
-  }
+}
   
-  .industry,.company-size,datalist,.country:focus{
+/* Input Placeholder Color */
+input::placeholder {
+  color: #E9EFEF;
+  opacity: 0.8;
+}
+  
+.industry,.company-size,datalist,.country:focus{
     outline: none;
     border-color: #00D9FF; /* Focused input border color */
     box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Light blue shadow when focused */
-  }
-  /* Button */
-  button {
+}
+
+/* Focus States */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #00D9FF;
+  box-shadow: 0 0 5px rgba(0, 217, 255, 0.5);
+}
+
+/* Button */
+button {
     background: #00D9FF;
     color: #030C15;
     font-size: 1rem;
@@ -91,11 +91,11 @@ select{
     padding: 0.8rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  button:hover {
-    background-color: #00BCE8;
-  }
+button:hover {
+  background-color: #00BCE8;
+}
 
   input,datalist[type="text"] {
     width: 100%;
@@ -151,8 +151,6 @@ select{
     margin-top: 20px;
   }
 
- 
- 
   .step {
     display: none;
   }
@@ -192,6 +190,18 @@ select{
     display: flex;
     flex-direction: column;
     padding-left: 30px;
+    /* background: #084e5a; */
+    padding: 1rem;
+    border-radius: 18px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }.checkbox-groups {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
     background: #084e5a;
     padding: 1rem;
     border-radius: 18px;
@@ -205,11 +215,14 @@ select{
  input[type="checkbox"] {
     display: none;
  }
-  
+
+
   
   
   /* Custom Checkbox Style */
+
   input[type="checkbox"] + label {
+
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -218,8 +231,10 @@ select{
     color: #E9EFEF;
     margin-bottom: 10px;
     position: relative;
-    padding-left: 30px; /* Space for the custom checkbox */
+    padding-left: 30px;
   }
+    
+    
   
   /* Custom Checkbox Appearance */
   input[type="checkbox"] + label::before {
@@ -295,6 +310,7 @@ select{
     background: #030C15;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
   }
   .form-group {
     margin-bottom: 20px;
@@ -521,3 +537,411 @@ input[type="text"] {
   background-color: rgba(0, 217, 255, 0.2);
 }
 
+/* Container for the title */
+.form-title-container {
+  background: linear-gradient(to right, #0a2a43, #123a56); /*Keep the gradient*/
+  padding: 15px; /* Slightly increase padding */
+  border-radius: 11px; /*Rounded corners*/
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /*Slight elevation*/
+  text-align: center;
+  margin-bottom: 10px;
+  border: 2px solid #00d1ff; /*Subtle border matching the form color*/
+}
+
+.form-title {
+  font-size: 26px; /* Make title text slightly larger */
+  font-weight: bold;
+  color: #00d1ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+
+/* Add fade-in effect to the title container */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px); /* Start slightly above */
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0); /* End in place */
+  }
+}
+
+.form-title-container {
+  animation: fadeIn 1s ease-out; /* Smooth fade-in */
+}
+
+
+#btnBar{
+  margin-bottom: 50px;
+}
+
+#business-objectivesSelect{
+  width: 100%;
+  padding: 0.8rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  border: 1px solid #00D9FF; /* Adjust border color */
+  font-size: 1rem;
+  font-family: 'Manrope', sans-serif;
+  background-color: #030C15; /* Dark background */
+  
+  color: #E9EFEF; /* Light text color */
+}
+
+#business-objectivesSelect:focus{
+  outline: none;
+  border-color: #00D9FF; /* Focused input border color */
+  box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Light blue shadow when focused */
+}
+
+#pain-points:focus{
+  outline: none;
+  border-color: #00D9FF; /* Focused input border color */
+  box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Light blue shadow when focused */
+}
+
+
+.phone-input {
+  font-family: 'Manrope', sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.phone-input label {
+  font-size: 1rem;
+  color: #E9EFEF; /* Secondary color */
+}
+
+.phone-input input {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #E9EFEF; /* Secondary color */
+  border-radius: 0.5rem;
+  background-color: #030C15; /* Background color */
+  color: #E9EFEF; /* Text color */
+}
+
+.phone-input input:focus {
+  outline: none;
+  border-color: #00D9FF; /* Primary color */
+  box-shadow: 0 0 5px #00D9FF; /* Glowing effect */
+}
+
+.CPD{
+  font-size: 30px;
+  font-style: Bold;
+  font-weight: 600;
+}
+
+.BI{
+  font-size: 30px;
+  font-style: bold;
+  font-weight: 900;
+ 
+  
+}
+
+/* Modal container */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999; /* High z-index to ensure visibility */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(3, 12, 21, 0.8); /* Semi-transparent dark background */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  
+}
+
+#success-modal{
+  display: none;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #030C15; /* Your website's dark theme */
+  color: #E9EFEF; /* Secondary color */
+  border: 2px solid #00D9FF; /* Primary brand color */
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  font-family: 'Manrope', sans-serif; /* Your website font */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 18px;
+  color: #00D9FF; /* Match your brand color */
+  cursor: pointer;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.error-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(3, 12, 21, 0.9); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.error-modal-content {
+  background-color: #030c15; /* Dark theme background */
+  border: 2px solid #FF4D4F; /* Error color (contrasting with your branding) */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+  color: #e9efef; /* Light text color for readability */
+  box-shadow: 0 0 15px rgba(255, 77, 79, 0.8); /* Glowing error border */
+}
+
+.error-modal-content p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FF4D4F; /* Error text color */
+  margin: 0 0 15px;
+  line-height: 1.5;
+}
+
+/* Close Button */
+.error-close {
+  color: #FF4D4F; /* Error close button color */
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px; /* Positioned inside the modal card */
+  cursor: pointer;
+  background: #030c15; /* Match modal background */
+  border: 1px solid #FF4D4F; /* Border to make it look like a button */
+  border-radius: 50%; /* Rounded close button */
+  width: 30px;
+  height: 30px;
+  line-height: 28px; /* Align text inside */
+  text-align: center;
+}
+
+.error-close:hover {
+  color: #FF6A6C; /* Slight hover effect for the close button */
+  border-color: #FF6A6C;
+}
+
+.newsletter-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 1px;
+  color: #e9efef; /* Secondary color from your branding */
+  margin: 20px 0;
+}
+
+.newsletter-consent input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #00d9ff; /* Primary branding color */
+  cursor: pointer;
+}
+
+.newsletter-consent label {
+  font-size: 1px;
+  line-height: 1.4;
+  cursor: pointer; /* Clicking label toggles checkbox */
+}
+
+.newsletter-consent input[type="checkbox"]:checked + label {
+  font-weight: bold; /* Optional styling to indicate selection */
+}
+
+.name-container {
+  display: flex;
+  gap: 1rem; /* Add spacing between the two inputs */
+  flex-wrap: wrap; /* Ensure responsiveness for smaller screens */
+}
+
+.name-input {
+  flex: 2; /* Make both inputs take equal width */
+  min-width: 200px; /* Set a minimum width for better responsiveness */
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem; /* Adjust size for readability */
+}
+
+input {
+  width: 100%; /* Make input fill its container */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input:focus {
+  border-color: #00d9ff; /* Your brand primary color */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 217, 255, 0.5); /* Subtle glow effect */
+}
+
+
+@media (max-width: 768px) {
+  .name-container {
+    flex-direction: column; /* Stack inputs on smaller screens */
+  }
+}
+
+.consent-section {
+  background-color: #030c15; /* Dark theme background */
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(233, 239, 239, 0.1); /* Subtle border */
+}
+
+.consent-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.consent-item:last-child {
+  margin-bottom: 0;
+}
+
+
+
+input[type="checkbox"]:checked {
+  background-color: #00d9ff; /* Brand color for checked state */
+  border-color: #00d9ff;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+
+
+
+
+.consent-section {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.consent-section:hover {
+  border-color: #00d9ff; /* Highlight border on hover */
+}
+
+.fc{
+  font-weight: 1;
+  font-size: 200px;
+}
+
+@media only screen and (min-width: 769px){
+  .form-container {
+    width: 100%;
+    max-width: 1200px;
+    
+  } 
+  .checkbox-group {
+    max-width: 800px;
+  }
+}
+
+@media only screen and (max-width: 699px){
+  .form-container {
+    width: 100%;
+    max-width: 1000px;
+    
+  }
+  .checkbox-group {
+    max-width: 1000px;
+  }
+}
+
+@media only screen and (max-width: 1256px){
+  .form-container {
+    width: 100%;
+    max-width: 1200px;
+    
+  }
+  .checkbox-group {
+    max-width: 1100px;
+  }
+  input[type="checkbox"] + label {
+    font-size: 25px;
+  }
+}
+
+
+@media only screen and (max-width: 1268px){
+  .form-container {
+    width: 100%;
+    max-width: 1400px;
+    
+  }
+}
+
+@media only screen and (min-width: 1268px) {
+  .form-container {
+    width: 100%;
+    max-width: 1500px;
+    
+  }
+  .checkbox-group {
+    max-width: 1500px;
+  }
+
+  input[type="checkbox"] + label {
+    font-size: 25px;
+  }
+  input[type="text"] {
+    height: 65px;
+    font-size: 18px;
+  }
+  input {
+    height: 65px;
+    font-size: 18px;
+  }
+}

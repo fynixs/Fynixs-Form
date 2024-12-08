@@ -1,6 +1,7 @@
 // all input validation listener
 document.getElementById('website').addEventListener('input', isValidWebsite);
-document.getElementById('fullName').addEventListener('input', isValidFullName);
+document.getElementById('firstName').addEventListener('input', isValidFirstName);
+document.getElementById('lastName').addEventListener('input', isValidlastName);
 document.getElementById('email').addEventListener('input', isValidEmail);
 document.getElementById('companyName').addEventListener('input', isValidcompanyName);
 
@@ -24,22 +25,58 @@ function isValidWebsite() {
     }
   }
 
-  function isValidFullName() {
-    const companyNameField = document.getElementById('fullName');
-    const errorField = document.getElementById('fullName-error');
-    const namePattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
-  
-    if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
-      errorField.textContent = "No Number or Symbols Allowed";
-      errorField.style.color = "#FF5733";
-      companyNameField.style.borderColor = "#FF5733";
-      return false;
-    } else {
-      errorField.textContent = "";
-      companyNameField.style.borderColor = "#00D9FF";
-      return true;
-    }
+// Validate  text pattern
+function isValidCompanyName() {
+  const companyNameField = document.getElementById('companyName');
+  const errorField = document.getElementById('company-name-error');
+  const namePattern = /^[a-zA-Z\s0-9]+$/; // Allows letters, spaces, and numbers but no symbols
+
+
+  if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
+    errorField.textContent = "No Symbols Allowed";
+    errorField.style.color = "#FF5733";
+    companyNameField.style.borderColor = "#FF5733";
+    return false;
+  } else {
+    errorField.textContent = "";
+    companyNameField.style.borderColor = "#00D9FF";
+    return true;
   }
+}
+
+function isValidFirstName() {
+  const companyNameField = document.getElementById('firstName');
+  const errorField = document.getElementById('firstName-error');
+  const namePattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
+
+  if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
+    errorField.textContent = "No Number or Symbols Allowed";
+    errorField.style.color = "#FF5733";
+    companyNameField.style.borderColor = "#FF5733";
+    return false;
+  } else {
+    errorField.textContent = "";
+    companyNameField.style.borderColor = "#00D9FF";
+    return true;
+  }
+}
+function isValidlastName() {
+  const companyNameField = document.getElementById('lastName');
+  const errorField = document.getElementById('lastName-error');
+  const namePattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
+
+  if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
+    errorField.textContent = "No Number or Symbols Allowed";
+    errorField.style.color = "#FF5733";
+    companyNameField.style.borderColor = "#FF5733";
+    return false;
+  } else {
+    errorField.textContent = "";
+    companyNameField.style.borderColor = "#00D9FF";
+    return true;
+  }
+}
+
 
   function isValidEmail() {
     const emailField = document.getElementById("email");
@@ -116,9 +153,9 @@ function showStep(step) {
     
   }
 
-  function prevStep(previous) {
-    showStep(previous);
-    updateProgress(-1);
+function prevStep(previous) {
+  showStep(previous);
+  updateProgress(-1);
 }
 
   // Initialize by showing the first step
@@ -233,7 +270,7 @@ function isStep1Valid() {
 
   // Check if "Other" industry input is filled when "Other" is selected
   const industryDropdown = document.getElementById("industry");
-  const industryOtherInput = document.getElementById("industry-other-input");
+  const industryOtherInput = document.getElementById("other-industry-container");
   if (industryDropdown.value === "Other" && industryOtherInput.value.trim() === "") {
     alert("Please specify your industry.");
     industryOtherInput.focus();
@@ -246,20 +283,20 @@ function isStep1Valid() {
 
 // Event Listener for the "Next" button
 document.querySelector(".next-btn").addEventListener("click", function () {
-  if(!isValidEmail() || !isValidFullName() || !isValidWebsite() || !isValidcompanyName()){
-    alert("Make sure there is no error")
-  }
-  if (isStep1Valid() && isValidEmail() && isValidFullName() && isValidWebsite() && isValidcompanyName()) {
+  if (isStep1Valid() && isValidEmail() && isValidlastName() && isValidFirstName()  && isValidWebsite() && isValidcompanyName()) {
     // Proceed to Step 2 if validation is successful
     nextStep(2);
     updateProgress(1);
-    formData.fullName = document.getElementById('fullName').value.trim();
+    formData.FirstName = document.getElementById('firstName').value.trim();
+    formData.LastName = document.getElementById('lastName').value.trim();
     formData.email = document.getElementById('email').value.trim();
     formData.companyName = document.getElementById('companyName').value.trim();
     formData.companyName = document.getElementById('website').value.trim();
     formData.industry = document.getElementById('role').value;
     formData.teamSize = document.getElementById('industry').value;
     completedSteps = 2 ;
+  }else{
+    alert("do moree");
   }
 });
 
@@ -542,3 +579,105 @@ function getCheckedValues(groupName) {
   return Array.from(document.querySelectorAll(`input[name="${groupName}"]:checked`))
     .map(input => input.value);
 }
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const roleDropdown = document.getElementById('role');
+//   const otherRoleInput = document.getElementById('other-role');
+
+//   // Add event listener for dropdown changes
+//   roleDropdown.addEventListener('change', function () {
+//     if (this.value === 'Other') {
+//       // Show the input field for "Other" and make it required
+//       otherRoleInput.style.display = 'block';
+//       otherRoleInput.required = true;
+//     } else {
+//       // Hide the input field for "Other" and remove its required attribute
+//       otherRoleInput.style.display = 'none';
+//       otherRoleInput.required = false;
+//     }
+//   });
+// });
+
+// function handleIndustryChange(select) {
+//   const localServiceContainer = document.getElementById("local-service-business-container");
+//   const otherIndustryContainer = document.getElementById("other-industry-container");
+//   const localServiceSelect = document.getElementById("local-service-type");
+//   const otherIndustryInput = document.getElementById("other-industry");
+
+//   // Show or hide the local service business dropdown
+//   if (select.value === "LocalServiceBusiness") {
+//     localServiceContainer.style.display = "block";
+//     localServiceSelect.setAttribute("required", "required");
+//   } else {
+//     localServiceContainer.style.display = "none";
+//     localServiceSelect.removeAttribute("required");
+//   }
+
+//   // Show or hide the 'Other' industry input
+//   if (select.value === "Other") {
+//     otherIndustryContainer.style.display = "block";
+//     otherIndustryInput.setAttribute("required", "required");
+//   } else {
+//     otherIndustryContainer.style.display = "none";
+//     otherIndustryInput.removeAttribute("required");
+//   }
+// }
+
+
+// function handleLocalServiceChange(select) {
+//   const otherLocalServiceContainer = document.getElementById("local-service-other-container");
+//   const otherLocalServiceInput = document.getElementById("local-service-other");
+
+//   // Show or hide the input for 'Other' local service type
+//   if (select.value === "Other") {
+//     otherLocalServiceContainer.classList.remove("hidden");
+//     otherLocalServiceInput.setAttribute("required", "required");
+//   } else {
+//     otherLocalServiceContainer.classList.add("hidden");
+//     otherLocalServiceInput.removeAttribute("required");
+//   }
+// }
+
+
+
+// // Show modal function
+// function showModal() {
+//   const modal = document.getElementById("success-modal");
+//   modal.style.display = "flex"; // Set to flex to make it visible and centered
+// }
+
+// // Close modal function
+// function closeModal() {
+//   const modal = document.getElementById("success-modal");
+//   modal.style.display = "none"; // Hide the modal
+// }
+
+
+// // Add event listener to the close button
+// document.querySelector(".close-button").addEventListener("click", closeModal);
+
+// // Close the modal when clicking outside the content
+// window.addEventListener("click", function (event) {
+//   const modal = document.getElementById("popupModal");
+//   if (event.target === modal) {
+//     closeModal();
+//   }
+// });
+
+
+// function showErrorModal(message) {
+//   const errorModal = document.getElementById("error-modal");
+//   const errorMessage = document.getElementById("error-message");
+
+//   // Set the error message
+//   errorMessage.textContent = message;
+
+//   // Show the modal
+//   errorModal.style.display = "flex";
+// }
+
+// function hideErrorModal() {
+//   const errorModal = document.getElementById("error-modal");
+//   errorModal.style.display = "none";
+// }

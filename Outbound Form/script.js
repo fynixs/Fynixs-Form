@@ -1,6 +1,19 @@
 const steps = document.querySelectorAll('.step');
 let currentStep = 0;
 const formData = {};
+const phoneInput = document.getElementById("phone");
+
+// Initialize intl-tel-input
+const iti = window.intlTelInput(phoneInput, {
+  initialCountry: "auto",
+  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+});
+
+// Get the country dial code
+function getCountryCode() {
+  const countryData = iti.getSelectedCountryData();
+  return countryData.dialCode; // Returns the country dial code (e.g., "1" for the US)
+}
 
 
 // Function to show the current step
@@ -46,9 +59,25 @@ function isValidCompanyName() {
   }
 }
 
-function isValidFullName() {
-  const companyNameField = document.getElementById('fullName');
-  const errorField = document.getElementById('fullName-error');
+function isValidFirstName() {
+  const companyNameField = document.getElementById('firstName');
+  const errorField = document.getElementById('firstName-error');
+  const namePattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
+
+  if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
+    errorField.textContent = "No Number or Symbols Allowed";
+    errorField.style.color = "#FF5733";
+    companyNameField.style.borderColor = "#FF5733";
+    return false;
+  } else {
+    errorField.textContent = "";
+    companyNameField.style.borderColor = "#00D9FF";
+    return true;
+  }
+}
+function isValidlastName() {
+  const companyNameField = document.getElementById('lastName');
+  const errorField = document.getElementById('lastName-error');
   const namePattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
 
   if (!namePattern.test(companyNameField.value.trim()) && companyNameField.value.trim() !== "") {
@@ -64,7 +93,7 @@ function isValidFullName() {
 }
 
 function isValidNumber() {
-  const phoneNumberField = document.getElementById('phoneNumber');
+  const phoneNumberField = document.getElementById('phone');
   const errorField = document.getElementById('numberEror');
   const phonePattern = /^[0-9]+$/; // Only digits
 
@@ -114,56 +143,77 @@ document.querySelectorAll('input[required], select[required]').forEach(input => 
 // all input validation listener
 document.getElementById('website').addEventListener('input', isValidWebsite);
 document.getElementById('companyName').addEventListener('input', isValidCompanyName);
-document.getElementById('fullName').addEventListener('input', isValidFullName);
-document.getElementById('phoneNumber').addEventListener('input', isValidNumber);
+document.getElementById('firstName').addEventListener('input', isValidFirstName);
+document.getElementById('lastName').addEventListener('input', isValidlastName);
+document.getElementById('phone').addEventListener('input', isValidNumber);
 
+
+
+
+document.querySelector('#prev-to-step-1').addEventListener('click',previousStep1());
 // Navigation button event listeners
 document.querySelector('#next-to-step-2').addEventListener('click', () => {
-  if (checkInputs() && isValidCompanyName() && isValidFullName() && isValidNumber()) {
+  
+  if (checkInputs() && isValidCompanyName()  ) {
     currentStep = 1; // Move to Step 2
     showStep(currentStep);
     updateProgress(1);
     captureData(1);
-    nextStep(1);
+    
+    document.getElementById('business-objectivesSelect').value.trim() 
+    // completedSteps = 2;
+  }else{
+    showErrorModal("Oops! Please make sure to fill out all the required fields correctly in step 1 before proceeding.");
   }
 });
 
 
 
-
-
 document.querySelector('#next-to-step-3').addEventListener('click', () => {
+  const phoneInput = document.getElementById('phone');
+  const countryCode = iti.getSelectedCountryData().dialCode; // Get country code
+  const isPhoneValid = iti.isValidNumber(); // Validate the phone number
+
   if (
-    document.getElementById('fullName').value.trim() &&
+    // document.getElementById('fullName').value.trim() &&
     document.getElementById('department').value.trim() &&
-    document.getElementById('phoneNumberSelection').value.trim() &&
-    isValidEmail() // Ensure email is valid before proceeding
+    isValidEmail() && // Ensure email is valid before proceeding
+    isPhoneValid && // Ensure phone number is valid
+    countryCode && // Ensure country code is selected
+    phoneInput.value.trim() && // Ensure phone input is not empty
+    isValidFirstName() &&
+    isValidlastName()
   ) {
     currentStep = 2; // Proceed to Step 3
     showStep(currentStep);
     updateProgress(2);
     captureData(2);
-    nextStep(2);
+    completedSteps = 3;
   } else {
-    alert('Please complete all required fields with valid information in Step 2.');
+    showErrorModal(
+      "Oops! Please make sure to fill out all the required fields correctly, including a valid phone number with a country code, before proceeding."
+    );
   }
 });
+
 
 
 document.querySelector('#submit').addEventListener('click', () => {
   const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
   const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-  const consentCheckbox = document.getElementById('t&c').checked;
+  const consentCheckbox = document.getElementById('followup-consent').checked;
 
-  if (checkInputs() && isChecked && isValidChallenges() && consentCheckbox) {
+  if (checkInputs() && isChecked && consentCheckbox) {
     submitForm();
+    completedSteps = 4;
+    
   } else {
+      showErrorModal("Oops! Please make sure to fill out all the required fields before proceeding.");
     if (!consentCheckbox) {
-      alert('You must agree to be contacted by FYNIXS to proceed.');
-    } else if (!isChecked) {
-      alert('Please select at least one service.');
+      showErrorModal("You must agree to be contacted by FYNIXS to proceed.");
+    
     } else {
-      alert('Please complete all required fields with valid information in Step 3.');
+      showErrorModal("Oops! Please make sure to fill out all the required fields before proceeding.");
     }
   }
 });
@@ -171,13 +221,16 @@ document.querySelector('#submit').addEventListener('click', () => {
 
 
 
+function previousStep1(){
+  document.querySelector('#prev-to-step-1').addEventListener('click', () => {
+    currentStep = 0;
+    showStep(currentStep);
+    updateProgress(0);
+    navigateToStep(0);
+  
+  });
+}
 
-document.querySelector('#prev-to-step-1').addEventListener('click', () => {
-  currentStep = 0;
-  showStep(currentStep);
-  updateProgress(0);
-  navigateToStep(0);
-});
 
 document.querySelector('#prev-to-step-2').addEventListener('click', () => {
   currentStep = 1;
@@ -270,37 +323,38 @@ document.getElementById("country").addEventListener("input", function () {
       return true;
     }
   }
-  document.getElementById('currentChallenges').addEventListener('input', function () {
-    const textArea = this;
-    const errorField = document.getElementById('challengesError'); // Add an element for error display if not already there
-    const minLength = 50;
+
+  // document.getElementById('currentChallenges').addEventListener('input', function () {
+  //   const textArea = this;
+  //   const errorField = document.getElementById('challengesError'); // Add an element for error display if not already there
+  //   const minLength = 50;
   
-    if (textArea.value.trim().length < minLength) {
-      errorField.textContent = `Please enter at least ${minLength} characters.`;
-      errorField.style.color = "#FF5733";
-      textArea.style.borderColor = "#FF5733";
-    } else {
-      errorField.textContent = "";
-      textArea.style.borderColor = "#00D9FF"; // Reset to valid border color
-    }
-  });
+  //   if (textArea.value.trim().length < minLength) {
+  //     errorField.textContent = `Please enter at least ${minLength} characters.`;
+  //     errorField.style.color = "#FF5733";
+  //     textArea.style.borderColor = "#FF5733";
+  //   } else {
+  //     errorField.textContent = "";
+  //     textArea.style.borderColor = "#00D9FF"; // Reset to valid border color
+  //   }
+  // });
   
-  function isValidChallenges() {
-    const textArea = document.getElementById('currentChallenges');
-    const errorField = document.getElementById('challengesError');
-    const minLength = 50;
+  // function isValidChallenges() {
+  //   const textArea = document.getElementById('currentChallenges');
+  //   const errorField = document.getElementById('challengesError');
+  //   const minLength = 50;
   
-    if (textArea.value.trim().length < minLength) {
-      errorField.textContent = `Please enter at least ${minLength} characters.`;
-      errorField.style.color = "#FF5733";
-      textArea.style.borderColor = "#FF5733";
-      return false;
-    } else {
-      errorField.textContent = "";
-      textArea.style.borderColor = "#00D9FF"; // Reset border color
-      return true;
-    }
-  }
+  //   if (textArea.value.trim().length < minLength) {
+  //     errorField.textContent = `Please enter at least ${minLength} characters.`;
+  //     errorField.style.color = "#FF5733";
+  //     textArea.style.borderColor = "#FF5733";
+  //     return false;
+  //   } else {
+  //     errorField.textContent = "";
+  //     textArea.style.borderColor = "#00D9FF"; // Reset border color
+  //     return true;
+  //   }
+  // }
   
   document.getElementById('industry').addEventListener('change', function () {
     const otherIndustryInput = document.getElementById('other-industry-container');
@@ -319,9 +373,11 @@ document.getElementById("country").addEventListener("input", function () {
 
 
 
+
 // Select all progress bars and the progress line
 const bars = document.querySelectorAll(".bar");
 const progressBar = document.querySelector(".progress-bar");
+
 
 
 // Update progress bar
@@ -360,27 +416,39 @@ function submitForm() {
   captureData(3);
 
   // Define your Zapier webhook URL
-  const url = "https://cors-anywhere.herokuapp.com/https://hooks.zapier.com/hooks/catch/20714053/2rj11nk/";
+  const url = "https://cors-anywhere.herokuapp.com/https://hooks.zapier.com/hooks/catch/20862443/2ir9bsz/";
+
+  const dialCode = getCountryCode();
+  const phoneNumber = phoneInput.value;
+
 
 
   // Prepare the data for submission
   const formData = {
-    companyName: document.getElementById("companyName").value,
-    industry: document.getElementById("industry").value,
+    CompanyName: document.getElementById("companyName").value,
+    Industry: document.getElementById("industry").value,
     otherIndustry: document.getElementById("other-industry-container").style.display === "block" 
       ? document.querySelector("#other-industry-container input").value 
       : null,
-    website: document.getElementById("website").value,
-    companySize: document.getElementById("companySize").value,
-    country: document.getElementById("country").value,
-    fullName: document.getElementById("fullName").value,
+    CompanyWebsite: document.getElementById("website").value,
+    CompanySize: document.getElementById("companySize").value,
+    BusinessObjective: document.getElementById("business-objectivesSelect").value,
+    OtherBusinessObjective: document.getElementById("other-objective").value,
+    PainPoints: document.getElementById("pain-points").value,
+    Country: document.getElementById("country").value,
+    FirstName: document.getElementById("firstName").value,
+    LastName: document.getElementById("lastName").value,
     department: document.getElementById("department").value,
     contactEmail: document.getElementById("contactEmail").value,
-    phoneNumberSelection: document.getElementById("phoneNumberSelection").value,
-    phoneNumber: document.querySelector(".phone-number input").value,
-    currentChallenges: document.getElementById('currentChallenges').value,
+    CountryCode: dialCode,
+    phoneNumber: phoneNumber,
+    // currentChallenges: document.getElementById('currentChallenges').value,
     referral: document.getElementById('referral').value,
-   additionalComments:document.getElementById('additionalComments').value
+    otherServices: document.getElementById('other-services').value,
+    Services: Array.from(document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked')).map(checkbox => checkbox.id),
+   additionalComments:document.getElementById('additionalComments').value,
+   NewsletterConsent: document.getElementById("newsletter-consent").checked // Check if the checkbox is checked
+
   };
   
   // Send the data via fetch
@@ -392,12 +460,18 @@ function submitForm() {
       body: JSON.stringify(formData)
   })
   .then(response => {
-      if (response.ok) {
-          // Redirect to submit.html upon successful submission
+    if (response.ok) {
+      // Show the modal with the success message
+      showModal("Your form has been submitted successfully!");
+  
+      // Redirect to thankyou.html after 5 seconds
+      setTimeout(() => {
           window.location.href = "thankyou.html";
-      } else {
-          throw new Error("Network response was not ok.");
-      }
+      }, 1000); // 5000 milliseconds = 5 seconds
+    } else {
+        throw new Error("Network response was not ok.");
+    }
+  
   })
   .catch(error => {
       console.error("Error submitting form:", error);
@@ -405,47 +479,133 @@ function submitForm() {
   });
 }
 
+const businessObjectivesSelect = document.getElementById('business-objectivesSelect');
+const otherObjectiveInput = document.getElementById('other-objective');
 
-// Select all progress bar steps
-const progressSteps = document.querySelectorAll('.bar');
+// Add an event listener to check when the user changes the dropdown
+businessObjectivesSelect.addEventListener('change', function() {
+  // Check if the selected value is "Other"
+  if (businessObjectivesSelect.value === 'other') {
+    otherObjectiveInput.style.display = 'block'; // Show the "Other" input
+  } else {
+    otherObjectiveInput.style.display = 'none'; // Hide the "Other" input
+  }
+});
 
-let completedSteps = 0; // Update this variable as steps are completed
 
-// Function to navigate to a specific step
-function navigateToStep(stepNumber) {
-  // Update the current step
-  currentStep = stepNumber;
+// Get references to the checkbox and the "Other" input container
+const otherCheckbox = document.getElementById('other-checkbox');
+const otherServicesContainer = document.getElementById('other-services-container');
 
-  // Show the requested step (you'll need to implement this)
-  showStep(currentStep);
+// Add an event listener to the checkbox
+otherCheckbox.addEventListener('change', function () {
+  if (this.checked) {
+    // Show the "Other" input container when the checkbox is checked
+    otherServicesContainer.style.display = 'block';
+  } else {
+    // Hide the "Other" input container when the checkbox is unchecked
+    otherServicesContainer.style.display = 'none';
+  }
+});
 
-  // Update the progress bar UI to reflect the active step
-  updateProgress(currentStep);
+
+
+// Show modal function
+function showModal() {
+  const modal = document.getElementById("success-modal");
+  modal.style.display = "flex"; // Set to flex to make it visible and centered
 }
 
-// Function to show the step (update form display based on step number)
-function showStep(stepNumber) {
-  const steps = document.querySelectorAll('.form-step'); // Replace with your step containers
-  steps.forEach((step, index) => {
-    step.style.display = index === stepNumber ? 'block' : 'none';
-  });
+// Close modal function
+function closeModal() {
+  const modal = document.getElementById("success-modal");
+  modal.style.display = "none"; // Hide the modal
 }
 
-// Function to update progress bar states
-function updateProgress(stepNumber) {
-  progressSteps.forEach((step, index) => {
-    // Add 'completed' class for all steps before and including the current step
-    if (index <= stepNumber) {
-      step.classList.add('completed');
-    } else {
-      step.classList.remove('completed');
-    }
 
-    // Add 'active' class to the current step only
-    if (index === stepNumber) {
-      step.classList.add('active');
-    } else {
-      step.classList.remove('active');
-    }
-  });
+// Add event listener to the close button
+document.querySelector(".close-button").addEventListener("click", closeModal);
+
+// Close the modal when clicking outside the content
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("popupModal");
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+
+function showErrorModal(message) {
+  const errorModal = document.getElementById("error-modal");
+  const errorMessage = document.getElementById("error-message");
+
+  // Set the error message
+  errorMessage.textContent = message;
+
+  // Show the modal
+  errorModal.style.display = "flex";
 }
+
+function hideErrorModal() {
+  const errorModal = document.getElementById("error-modal");
+  errorModal.style.display = "none";
+}
+
+
+function handleIndustryChange(select) {
+  const localServiceContainer = document.getElementById("local-service-business-container");
+  const otherIndustryContainer = document.getElementById("other-industry-container");
+  const localServiceSelect = document.getElementById("local-service-type");
+  const otherIndustryInput = document.getElementById("other-industry");
+
+  // Show or hide the local service business dropdown
+  if (select.value === "LocalServiceBusiness") {
+    localServiceContainer.style.display = "block";
+    localServiceSelect.setAttribute("required", "required");
+  } else {
+    localServiceContainer.style.display = "none";
+    localServiceSelect.removeAttribute("required");
+  }
+
+  // Show or hide the 'Other' industry input
+  if (select.value === "Other") {
+    otherIndustryContainer.style.display = "block";
+    otherIndustryInput.setAttribute("required", "required");
+  } else {
+    otherIndustryContainer.style.display = "none";
+    otherIndustryInput.removeAttribute("required");
+  }
+}
+
+function handleLocalServiceChange(select) {
+  const otherLocalServiceContainer = document.getElementById("local-service-other-container");
+  const otherLocalServiceInput = document.getElementById("local-service-other");
+
+  // Show or hide the input for 'Other' local service type
+  if (select.value === "Other") {
+    otherLocalServiceContainer.classList.remove("hidden");
+    otherLocalServiceInput.setAttribute("required", "required");
+  } else {
+    otherLocalServiceContainer.classList.add("hidden");
+    otherLocalServiceInput.removeAttribute("required");
+  }
+}
+
+// Get references to the select dropdown and the "Other" input field
+const referralSelect = document.getElementById("referral");
+const otherReferralContainer = document.getElementById("other-referral-container");
+const otherReferralInput = document.getElementById("other-referral");
+
+// Listen for changes to the dropdown
+referralSelect.addEventListener("change", () => {
+  if (referralSelect.value === "other") {
+    // Show the 'Other' input field and make it required
+    otherReferralContainer.style.display = "block";
+    otherReferralInput.setAttribute("required", "true");
+  } else {
+    // Hide the 'Other' input field and remove its required attribute
+    otherReferralContainer.style.display = "none";
+    otherReferralInput.removeAttribute("required");
+    otherReferralInput.value = ""; // Clear the input field
+  }
+});

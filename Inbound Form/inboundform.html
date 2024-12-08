@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYNIXS Form</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../Images/FynixsLogo.png" type="image/png" sizes="200px">
+  <!-- Include Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Panchang:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <!-- Modal -->
+        <div id="success-modal" class="modal">
+            <div class="modal-content" >
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <p id="modal-message">Your form has been submitted successfully!</p>
+            </div>
+        </div>
+    
+        <!-- Error Modal -->
+        <div id="error-modal" class="modal inline-error-modal" style="display: none;">
+            <div class="error-modal-content">
+            <span class="error-close" onclick="hideErrorModal()">&times;</span>
+            <p id="error-message">Oops! Please make sure to fill out all the required fields before proceeding.</p>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar"></div>
+            <!-- Steps -->
+            <div class="bar active" data-step="1">1</div>
+            <div class="bar" data-step="2">2</div>
+            <div class="bar" data-step="3">3</div>
+            <div class="bar" data-step="4">4</div>
+            <div class="bar" data-step="5">5</div>
+        </div>
+
+        <form id="inboundForm">
+            <!-- Step 1: Contact & Business Information -->
+            <div class="form-step" id="step-1">
+              <h2>Contact & Business Information</h2>
+              
+              <!-- Full Name -->
+              <div class="name-container">
+                <div class="name-input">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="first-name" placeholder="First name" required>
+                  <small id="firstName-error" class="error-message"></small>
+                </div>
+              
+                <div class="name-input">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="last-name" placeholder="Last name" required>
+                  <small id="lastName-error" class="error-message"></small>
+                </div>
+              </div>
+              
+              
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="Enter your email address">
+              <span id="emailError" class="error-message"></span>
+              
+              <label for="companyName">Company Name</label>
+              <input type="text" id="companyName" name="companyName" required placeholder="Enter your company name">
+              <small id="company-name-error" class="error-message"></small>
+
+              
+              <label for="website">Website URL*</label>
+              <input type="url" id="website" name="website" placeholder="Enter your website URL" required>
+              <small id="websiteError" class="error-message"></small>
+              
+              <label for="role">Role/Title</label>
+              <div id="role-container">
+                <!-- Dropdown for roles -->
+                <select id="role" name="role" required>
+                      <option value="" disabled selected>Select your role/title</option>
+                      <option value="CEO">CEO</option>
+                      <option value="CTO">CTO</option>
+                      <option value="CMO">CMO</option>
+                      <option value="COO">COO</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Developer">Developer</option>
+                      <option value="Designer">Designer</option>
+                      <option value="Marketer">Marketer</option>
+                      <option value="Sales Executive">Sales Executive</option>
+                      <option value="Other">Other</option>
+                </select>
+
+                <!-- Hidden input for "Other" role -->
+                <input
+                    type="text"
+                    id="other-role"
+                    name="other_role"
+                    placeholder="Please specify your role"
+                    style="display: none;"
+                    class="other1"
+                />
+                <small id="other1-error" class="error-message"></small>
+              </div>
+
+              
+              <label for="industry">Industry</label>
+              <select id="industry" name="industry" required class="industry" onchange="handleIndustryChange(this)">
+                <option value="" disabled selected>Select your industry</option>
+                <option value="E-commerce">E-commerce And Retail Businesses</option>
+                <option value="LocalServiceBusiness">Local Service Business</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Technology and SaaS">Technology and SaaS</option>
+                <option value="Healthcare and Telemedicine">Healthcare and Telemedicine</option>
+                <option value="Digital Marketing Agencies">Digital Marketing Agencies</option>
+                <option value="other">Other</option>
+              </select>
+      
+                <!-- Hidden input field for 'Other' industry -->
+                <div id="other-industry-container" style="display: none;">
+                  <label for="other-industry">Please specify your industry</label>
+                  <input type="text" id="other-industry" name="industry" placeholder="Enter your industry" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm other2">
+                  <small id="other2-error" class="error-message other2-error"></small>
+                </div>
+        
+                <!-- Dropdown for Local Service Business Type -->
+                <div id="local-service-business-container" style="display: none;">
+                <label for="local-service-type" class="block text-sm font-medium text-gray-700">
+                    Type of Local Service Business
+                </label>
+                <select id="local-service-type" name="local-service-type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm" onchange="handleLocalServiceChange(this)">
+                  <option value="" disabled selected>--Select a Service--</option>
+                  <option value="Plumber">Plumber</option>
+                  <option value="Electrician">Electrician</option>
+                  <option value="SolarInstallation">Solar Installation</option>
+                  <option value="HVAC">HVAC</option>
+                  <option value="PestControl">Pest Control</option>
+                  <option value="CleaningService">Cleaning Service</option>
+                  <option value="Landscaping">Landscaping and Lawn Care</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span id="service-type-error" class="error-message"></span>
+                
+        
+                <!-- Hidden input field for 'Other' Local Service -->
+                <div id="local-service-other-container" class="mt-2 hidden">
+                    <label for="local-service-other" class="block text-sm font-medium text-gray-700">
+                    Specify Other Service
+                    </label>
+                    <input type="text" id="local-service-other" name="local-service-other" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm other3" placeholder="Enter your service type">
+                    <small id="other3-error" class="error-message"></small>
+                </div>
+                </div>
+              
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+
+            <!-- Step 2: Current Challenges & Processes -->
+            <div class="form-step" id="step-2" style="display: none;">
+              <h2>Current Challenges & Processes</h2>
+              <label for="challenges">What challenges are you currently facing?</label>
+              <div class="checkbox-group" >
+                <input type="checkbox" name="challenges" value="Lead Generation" id="LeadGen"><label for="LeadGen">Lead Generation</label> 
+                <input type="checkbox" name="challenges" value="Scaling Sales" id="ScalingS"> <label for="ScalingS">Scaling Sales</label>
+                <input type="checkbox" name="challenges" value="Reducing Costs" id="ReducingC"> <label for="ReducingC">Reducing Costs</label>
+                <input type="checkbox" name="challenges" value="Improving Efficiency" id="IE"><label for="IE">Improving Efficiency</label>
+                <input type="checkbox" name="challenges" value="Eliminating Repetitive Tasks" id="ERT"> <label for="ERT"> Eliminating Repetitive Tasks</label>
+                <input type="checkbox" id="challenge-other1" name="challenges" value="Other"/> <label for="challenge-other1">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input1"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+              </div>
+
+              <label for="timeConsumingTasks">Which areas of your business are the most time-consuming or repetitive?</label>
+              <div class="checkbox-group">
+                <input type="checkbox" name="timeConsumingTasks" value="Data Entry" id="dataEntry"> <label for="dataEntry">Data Entry</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Lead Nurturing" id="LeadNut"> <label for="LeadNut">Lead Nurturing</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Inventory Management" id="invtM"> <label for="invtM">Inventory Management</label> 
+                <input type="checkbox" name="timeConsumingTasks" value="Customer Support" id="CS"> <label for="CS">Customer Support</label> 
+                <input type="checkbox" id="challenge-other2" name="challenges" value="Other"/> <label for="challenge-other2">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input2"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+              </div>
+
+              <label for="currentTools">What tools or software do you currently use for business operations?</label>
+                <div class="checkbox-group">
+                  <input type="checkbox" name="currentTools" value="Excel/Google Sheets" id="excelGS"> <label for="excelGS">Excel/Google Sheets</label> 
+                  <input type="checkbox" name="currentTools" value="CRM Tools" id="CRMt"> <label for="">CRM Tools</label> 
+                  <input type="checkbox" name="currentTools" value="None" id="none"> <label for="none">None</label> 
+                  <input type="checkbox" id="challenge-other3" name="challenges" value="Other"/> <label for="challenge-other3">Other</label>
+
+                <input
+                  type="text"
+                  id="challenge-other-input3"
+                  class="hidden"
+                  placeholder="Please specify..."
+                />
+                </div>
+              
+              <button type="button" class="prev-btn" >Previous</button>
+              <button type="button" class="next-btn" >Next</button>
+            </div>
+        </form>
+    </div>
+    <script src="inboundscript.js"></script>
+</body>
+</html>

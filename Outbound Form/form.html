@@ -8,24 +8,136 @@
   <link rel="icon" href="../Images/FynixsLogo.png" type="image/png" sizes="200px">
   <!-- Include Choices.js CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Panchang:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  
+  <style>
+        /* General styling for the dropdown */
+    .iti {
+      font-family: 'Manrope', sans-serif; /* Use Manrope for the dropdown */
+    }
+
+    .iti__country-list {
+      background-color: #030C15; /* Background color for the dropdown */
+      border: 1px solid #00D9FF; /* Border color */
+      border-radius: 8px; /* Rounded corners */
+      color: #E9EFEF; /* Text color */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for a modern look */
+      max-height: 300px; /* Limit height and enable scrolling */
+      overflow-y: auto; /* Enable scrolling for long lists */
+    }
+
+    /* Styling individual country rows */
+    .iti__country {
+      padding: 8px 12px; /* Add spacing */
+      cursor: pointer; /* Change cursor to pointer */
+      transition: background-color 0.3s ease; /* Smooth hover transition */
+    }
+
+    .iti__country:hover,
+    .iti__country.iti__highlight {
+      background-color: #00D9FF; /* Highlighted background */
+      color: #030C15; /* Highlighted text */
+    }
+
+    /* Styling flags and names */
+    .iti__flag-box {
+      margin-right: 8px; /* Add spacing between flag and text */
+    }
+
+    .iti__country-name {
+      font-size: 14px; /* Adjust font size */
+    }
+
+    .iti__dial-code {
+      color: #E9EFEF; /* Color for the dialing code */
+      font-size: 12px; /* Adjust font size for dialing code */
+    }
+
+    /* Scrollbar styling */
+    .iti__country-list::-webkit-scrollbar {
+      width: 8px; /* Scrollbar width */
+    }
+
+    .iti__country-list::-webkit-scrollbar-thumb {
+      background-color: #00D9FF; /* Scrollbar thumb color */
+      border-radius: 4px; /* Rounded scrollbar */
+    }
+    #country::-webkit-scrollbar{
+      width: 8px; /* Scrollbar width */
+    }
+
+    #department::-webkit-scrollbar{
+      width: 8px; /* Scrollbar width */
+    }
+
+    #department::-webkit-scrollbar-thumb{
+      background-color: #00D9FF; /* Scrollbar thumb color */
+      border-radius: 4px; /* Rounded scrollbar */
+    }
+
+    #country::-webkit-scrollbar-thumb{
+      background-color: #00D9FF; /* Scrollbar thumb color */
+      border-radius: 4px; /* Rounded scrollbar */
+    }
+
+    .iti__country-list::-webkit-scrollbar-track {
+      background-color: #030C15; /* Scrollbar track color */
+    }
+
+    /* Active dropdown input box */
+    .iti__selected-flag {
+      background-color: #030C15; /* Match input background */
+      border: 1px solid #00D9FF; /* Match border color */
+    }
+
+    .iti--separate-dial-code .iti__selected-dial-code {
+      color: #E9EFEF; /* Match text color */
+    }
+
+  </style>
   
   <div class="form-container">
-     <div id="progress-container">
+    <!-- Modal Container -->
+    <!-- Modal -->
+    <!-- Modal -->
+    <div id="success-modal" class="modal">
+      <div class="modal-content" >
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <p id="modal-message">Your form has been submitted successfully!</p>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal inline-error-modal" style="display: none;">
+      <div class="error-modal-content">
+        <span class="error-close" onclick="hideErrorModal()">&times;</span>
+        <p id="error-message">Oops! Please make sure to fill out all the required fields before proceeding.</p>
+      </div>
+    </div>
+
+    
+    
+    <!-- <div class="form-title-container">
+      <h1 class="form-title">
+        FYNXS Automated Marketing Form
+      </h1>
+    </div> -->
+    
     <div class="progress-container">
       <!-- Progress Bar -->
       <div class="progress-bar"></div>
-
       <!-- Steps -->
       <div class="bar active" data-step="1">1</div>
       <div class="bar" data-step="2">2</div>
       <div class="bar" data-step="3">3</div>
     </div>
+
+
+
     <form id="multi-step-form" >
       <!-- Step 1 -->
       <div class="step active" id="step-1">
@@ -35,21 +147,50 @@
         <small id="company-name-error" class="error-message"></small>
 
         <label for="industry">Industry *</label>
-      <select id="industry" name="industry" required class="industry">
-        <option value="" disabled selected>Select your industry</option>
-        <option value="Local Based Service">Local Based Service</option>
-        <option value="Software Development">Software Development</option>
-        <option value="E-commerce">E-commerce</option>
-        <option value="Retail">Retail</option>
-        <option value="education">Education</option>
-        <option value="other">Other</option>
-      </select>
+        <select id="industry" name="industry" required class="industry" onchange="handleIndustryChange(this)">
+          <option value="" disabled selected>Select your industry</option>
+          <option value="E-commerce">E-commerce And Retail Businesses</option>
+          <option value="LocalServiceBusiness">Local Service Business</option>
+          <option value="Real Estate">Real Estate</option>
+          <option value="Technology and SaaS">Technology and SaaS</option>
+          <option value="Healthcare and Telemedicine">Healthcare and Telemedicine</option>
+          <option value="Digital Marketing Agencies">Digital Marketing Agencies</option>
+          <option value="other">Other</option>
+        </select>
 
       <!-- Hidden input field for 'Other' industry -->
       <div id="other-industry-container" style="display: none;">
         <label for="other-industry">Please specify your industry</label>
-        <input type="text" id="industry" name="industry" placeholder="Enter your industry">
+        <input type="text" id="other-industry" name="industry" placeholder="Enter your industry" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm">
       </div>
+
+      <!-- Dropdown for Local Service Business Type -->
+      <div id="local-service-business-container" style="display: none;">
+        <label for="local-service-type" class="block text-sm font-medium text-gray-700">
+          Type of Local Service Business
+        </label>
+        <select id="local-service-type" name="local-service-type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm" onchange="handleLocalServiceChange(this)">
+          <option value="" disabled selected>--Select a Service--</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Electrician">Electrician</option>
+          <option value="SolarInstallation">Solar Installation</option>
+          <option value="HVAC">HVAC</option>
+          <option value="PestControl">Pest Control</option>
+          <option value="CleaningService">Cleaning Service</option>
+          <option value="Landscaping">Landscaping and Lawn Care</option>
+          <option value="Other">Other</option>
+
+        </select>
+
+        <!-- Hidden input field for 'Other' Local Service -->
+        <div id="local-service-other-container" class="mt-2 hidden">
+          <label for="local-service-other" class="block text-sm font-medium text-gray-700">
+            Specify Other Service
+          </label>
+          <input type="text" id="local-service-other" name="local-service-other" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#030C15] text-[#E9EFEF] focus:border-[#00D9FF] focus:ring-[#00D9FF] sm:text-sm" placeholder="Enter your service type">
+        </div>
+      </div>
+
 
 
   
@@ -64,7 +205,7 @@
               class="form-input"
             />
             <small id="websiteError" class="error-message"></small>
-          </div>
+        </div>
           
                 
         <!-- Company Size Dropdown -->
@@ -72,10 +213,22 @@
         <select id="companySize" name="company-size" class="company-size" required>
             <option value="" disabled selected>Select your company size</option>
             <option value="1-10">1-10</option>
-            <option value="11-50">11-50</option>
-            <option value="51-200">51-200</option>
-            <option value="201+">201+</option>
+            <option value="11-50">11-20</option>
+            <option value="20-50">11-50</option>
+            <option value="51-100">51-200</option>
+            <option value="100+">201+</option>
         </select>
+
+        <label for="business-objectives">Business Objectives*</label>
+        <select id="business-objectivesSelect" name="business-objectives" required>
+          <option value="" selected disabled>Select an option</option>
+          <option value="growth">Growth</option>
+          <option value="cost-reduction">Cost Reduction</option>
+          <option value="improving-efficiency">Improving Efficiency</option>
+          <option value="improving-efficiency">Staying Ahead Of Competition</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="text" id="other-objective" name="other-objective" placeholder="If other, please specify" style="display:none;">
 
         <label for="country">Country/Location *</label>
         <select id="country" name="country" class="country" required>
@@ -276,19 +429,38 @@
           <option value="Zimbabwe">Zimbabwe</option>
 
         </select>
+
+        <label for="pain-points">Pain Points*</label>
+        <textarea id="pain-points" name="pain-points" placeholder="Please describe your current pain points (e.g., manual processes, too many repetitive tasks, inefficiencies)" rows="4" required></textarea>
+
         
 
     <button type="button" id="next-to-step-2">Next</button>
       </div>
 
       <!-- Step 2: Contact Person Details -->
-      <div id="step-2" class="step">
-          <h1>Contact Person Details</h1>
+      <div id="step-2" class="step" >
+          <h1 class="CPD">Contact Person Details</h1>
       
           <!-- Full Name -->
-          <label for="full-name">Your Full Name *</label>
-          <input type="text" id="fullName" name="full-name" placeholder="Enter full name" required>
-          <small id="fullName-error" class="error-message"></small>
+          <div class="name-container">
+            <div class="name-input">
+              <label for="first-name">First Name *</label>
+              <input type="text" id="firstName" name="first-name" placeholder="First name" required>
+              <small id="firstName-error" class="error-message"></small>
+            </div>
+            
+            
+          
+            <div class="name-input">
+              <label for="last-name">Last Name *</label>
+              <input type="text" id="lastName" name="last-name" placeholder="Last name" required>
+              <small id="lastName-error" class="error-message"></small>
+            </div>
+            
+          </div>
+          
+          
       
           <!-- Job Title -->
           <!-- Department -->
@@ -298,18 +470,10 @@
           <option value="Executive">Executive</option>
           <option value="Operations">Operations</option>
           <option value="Finance">Finance</option>
-          <option value="Technology">Technology</option>
           <option value="Marketing">Marketing</option>
           <option value="Sales">Sales</option>
           <option value="Human Resources">Human Resources</option>
           <option value="Customer Support">Customer Support</option>
-          <option value="Product Management">Product Management</option>
-          <option value="Design">Design</option>
-          <option value="Legal">Legal</option>
-          <option value="Procurement">Procurement</option>
-          <option value="Research and Development">Research and Development</option>
-          <option value="Training">Training</option>
-          <option value="Consulting">Consulting</option>
         </select>
 
       
@@ -321,56 +485,12 @@
       
           <!-- Phone Number -->
           
-          <label for="phone-number">Phone Number *</label>
-          <div class="phone-number">
-              <select name="" id="phoneNumberSelection" class="selection-phone-number" required>
-                  <option value="" disabled selected>Country Code</option>
-                  <option value="+1">+1</option>
-                  <option value="+44">+44</option>
-                  <option value="+91">+91</option>
-                  <option value="+61">+61</option>
-                  <option value="+81">+81</option>
-                  <option value="+86">+86</option>
-                  <option value="+49">+49</option>
-                  <option value="+33">+33</option>
-                  <option value="+39">+39</option>
-                  <option value="+34">+34</option>
-                  <option value="+55">+55</option>
-                  <option value="+7">+7</option>
-                  <option value="+27">+27</option>
-                  <option value="+82">+82</option>
-                  <option value="+34">+52</option>
-                  <option value="+62">+62</option>
-                  <option value="+234">+234</option>
-                  <option value="+971">(+971</option>
-                  <option value="+351">+351</option>
-                  <option value="+358">+358</option>
-                  <option value="+90">+90</option>
-                  <option value="+94">+94</option>
-                  <option value="+880">+880</option>
-                  <option value="+92">+92)</option>
-                  <option value="+63">+63</option>
-                  <option value="+64">+64</option>
-                  <option value="+1-787">+1-787</option>
-                  <option value="+48">+48</option>
-                  <option value="+420">+420</option>
-                  <option value="+373">+373</option>
-                  <option value="+260">+260</option>
-                  <option value="+250">+250</option>
-                  <option value="+372">+372</option>
-                  <option value="+233">+233</option>
-                  <option value="+84">+84</option>
-                  <option value="+66">+66</option>
-                  <option value="+60">+60</option>
-                  <option value="+94">="+94</option>
-                  <option value="+212">+212</option>
-                  <option value="+216">+216</option>
-                  <option value="+254">+254</option>
-                  <option value="+234">+234</option>
-                  <option value="+94">+94</option>
-              </select>
-              <input type="tel" id="phoneNumber" name="phone-number" placeholder="Enter phone number" required>
+          <div class="phone-input">
+            <label for="phone">Phone number</label>
+            <input id="phone" type="tel" placeholder="Enter your phone number" required>
           </div>
+          
+          
           <span id="numberEror" class="error-message"></span>
         
       
@@ -379,24 +499,32 @@
           <button type="button" id="next-to-step-3">Next</button>
       </div>
 
-      
+      <!-- Step 3 -->
       <div id="step-3" class="step">
           <h1>Services & Challenges</h1>
           <label >Services Interested In *</label>
-          <div class="checkbox-group" >
-           
-              <input type="checkbox" name="services" id="ma" ><label for="ma"> Marketing Automation</label>
-              <input type="checkbox" name="services" id="crmSetup" > <label for="mam"> CRM Setup</label> 
-              <input type="checkbox" name="services" id="LeadGen"><label for="mama"> Lead Generation</label>
 
-
+          <div class="checkbox-group" id="checkbox-group" >  
+            <input type="checkbox" name="services" id="NewsLetter Building" ><label for="NewsLetter Building">NewsLetter Building</label>
+            <input type="checkbox" name="services" id="CRM Setup" > <label for="CRM Setup">CRM Setup</label> 
+            <input type="checkbox" name="services" id="Automated Lead Nuturing"><label for="Automated Lead Nuturing">Automated Lead Nuturing</label>
+            <input type="checkbox" name="services" id="Customer Support"><label for="Customer Support">Customer Support</label>
+            <input type="checkbox" name="services" id="Automated Data Entry"><label for="Automated Data Entry">Automated Data Entry</label>
+            <input type="checkbox" name="services" id="other-checkbox"><label for="other-checkbox">Other</label>
           </div>
-          <label for="current-challenges">What Would you like to automate *</label>
+
+          <!-- Hidden input field for 'Other' services -->
+          <div id="other-services-container" style="display: none;">
+            <label for="other-services">Please specify desired services</label>
+            <input type="text" id="other-services" name="services" placeholder="Enter your services">
+          </div>
+
+          <!-- <label for="current-challenges">What Would you like to automate *</label>
           <textarea id="currentChallenges" name="current-challenges" placeholder="Describe your desired automation" class="industry" required></textarea>
-          <span id="challengesError"></span>
+          <span id="challengesError"></span> -->
 
           <label for="referral">How Did You Hear About Us? *</label>
-          <select id="referral" name="referral" required>
+          <select id="referral" class="industry" name="referral" required>
             <option value="">Select an option</option>
             <option value="referral">Referral</option>
             <option value="social-media">Social Media</option>
@@ -405,12 +533,35 @@
             <option value="other">Other</option>
           </select>
 
+          <!-- Hidden input field for 'Other' -->
+          <div id="other-referral-container" style="display: none;">
+            <label for="other-referral">Please specify:</label>
+            <input type="text" id="other-referral" name="other-referral" placeholder="Specify how you heard about us">
+          </div>
+
+
           <label for="additional-comments">Additional Comments or Questions</label>
           <textarea id="additionalComments" name="additional-comments" placeholder="Any additional information..."></textarea>
 
-          <div class="checkbox-group">
-            <input type="checkbox" name="services" id="t&c"><label for="t&c"> I agree to be contacted by FYNIXS for follow-up purposes.</label>
+          <div class="consent-section">
+            <!-- First consent item -->
+            <div class="consent-item">
+              <input type="checkbox" id="newsletter-consent" name="newsletter-consent" checked>
+              <label for="newsletter-consent" class="fc">
+                I agree to receive email newsletters from FYNIXS about updates, services, and special offers.
+              </label>
+            </div>
+            
+            <!-- Second consent item -->
+            <div class="consent-item">
+              <input type="checkbox" id="followup-consent" name="followup-consent">
+              <label for="followup-consent" class="fc">
+                I agree to be contacted by FYNIXS for follow-up purposes.
+              </label>
+            </div>
           </div>
+          
+          
 
           <button type="button" id="prev-to-step-2">Previous</button>
           <button type="submit" id="submit" class="submit-button" >Submit</button>
@@ -421,9 +572,46 @@
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <!-- Include jQuery (required by Select2) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
   <script src="script.js"></script>
   
+  <script>
+    const phoneInputField = document.querySelector("#phone");
+    const iti = window.intlTelInput(phoneInputField, {
+      initialCountry: "auto", // Auto-select based on user's location
+      geoIpLookup: function(callback) {
+        fetch("https://ipinfo.io?token=your_token") // Replace `your_token` with your IPInfo token
+          .then((response) => response.json())
+          .then((data) => callback(data.country))
+          .catch(() => callback("us"));
+      },
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // Add utils for formatting and validation
+    });
+
+    const phoneInput = document.getElementById("phone");
+    const itis = window.intlTelInput(phoneInput, {
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js", // to validate phone numbers
+      initialCountry: "auto",
+      geoIpLookup: function (callback) {
+        fetch("https://ipapi.co/json")
+          .then((response) => response.json())
+          .then((data) => callback(data.country_code))
+          .catch(() => callback("us"));
+      },
+    });
+
+    // Form Validation
+    document.querySelector("form").addEventListener("submit", function (event) {
+      // Check if the phone number is valid
+      if (!itis.isValidNumber()) {
+        event.preventDefault(); // Prevent form submission
+        alert("Please enter a valid phone number including the country code.");
+        phoneInput.focus();
+      }
+    });
   </script>
+  
  
 </body>
 </html>
