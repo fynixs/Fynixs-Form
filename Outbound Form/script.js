@@ -416,7 +416,9 @@ function submitForm() {
   captureData(3);
 
   // Define your Zapier webhook URL
-  const url = "https://cors-anywhere.herokuapp.com/https://hooks.zapier.com/hooks/catch/20862443/2ir9bsz/";
+
+  // https://cors-anywhere.herokuapp.com/
+  const url = "https://hooks.zapier.com/hooks/catch/20862443/2ir9bsz/";
 
   const dialCode = getCountryCode();
   const phoneNumber = phoneInput.value;
@@ -469,12 +471,13 @@ function submitForm() {
           window.location.href = "thankyou.html";
       }, 1000); // 5000 milliseconds = 5 seconds
     } else {
+      console.log(response)
         throw new Error("Network response was not ok.");
     }
   
   })
   .catch(error => {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form:", error.message);
       alert("There was an error submitting the form. Please try again.");
   });
 }
@@ -544,6 +547,12 @@ function showErrorModal(message) {
 
   // Show the modal
   errorModal.style.display = "flex";
+
+
+  errorModal.addEventListener('click' , () => {
+
+  errorModal.style.display = "none";
+  })
 }
 
 function hideErrorModal() {
@@ -601,7 +610,7 @@ referralSelect.addEventListener("change", () => {
   if (referralSelect.value === "other") {
     // Show the 'Other' input field and make it required
     otherReferralContainer.style.display = "block";
-    otherReferralInput.setAttribute("required", "true");
+    // otherReferralInput.setAttribute("required", "true");
   } else {
     // Hide the 'Other' input field and remove its required attribute
     otherReferralContainer.style.display = "none";
