@@ -878,7 +878,7 @@ input[type="checkbox"]:checked::after {
   font-size: 200px;
 }
 
-@media only screen and (min-width: 769px){
+/* @media only screen and (min-width: 769px){
   .form-container {
     width: 100%;
     max-width: 1200px;
@@ -912,17 +912,17 @@ input[type="checkbox"]:checked::after {
   input[type="checkbox"] + label {
     font-size: 25px;
   }
-}
+} */
 
 
-@media only screen and (max-width: 1268px){
+/* @media only screen and (max-width: 1268px){
   .form-container {
     width: 100%;
     max-width: 1400px;
     
   }
-}
-
+} */
+/* 
 @media only screen and (min-width: 1268px) {
   .form-container {
     width: 100%;
@@ -944,4 +944,4 @@ input[type="checkbox"]:checked::after {
     height: 65px;
     font-size: 18px;
   }
-}
+} */
